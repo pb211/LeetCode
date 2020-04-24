@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.util.List;
+public class p257_sumpath {
+	p257_sumpath left;
+	p257_sumpath right;
+    int val;
+    p257_sumpath(){}
+    p257_sumpath(int val) {this.val = val;}
+    public static void main(String[] args) {
+    	//创建树
+    	p257_sumpath root = new p257_sumpath(1);
+    	p257_sumpath left1 = new p257_sumpath(2);
+    	p257_sumpath left2 = new p257_sumpath(5);
+        p257_sumpath right = new p257_sumpath(3);
+        root.left = left1;
+        left1.right = left2;
+        root.right = right;
+        p257_sumpath p257_sumpath = new p257_sumpath();
+        List<String> ret = p257_sumpath.binaryTreePaths(root);
+        System.out.println("ret = " + ret);
+    }
+    public List<String> binaryTreePaths(p257_sumpath root) {
+        //创建list存放路径
+            List<String> ret = new ArrayList<String>();
+          //没有根节点直接返回空路径
+            if(root==null) return ret;
+            solve(root, "", ret);
+            return ret;
+        }
+        public void solve(p257_sumpath root, String cur, List<String> ret){
+            if(root==null) return;
+            cur += root.val;
+            if(root.left==null&&root.right==null){
+                ret.add(cur);
+            }else{
+            //当左右分支还有节点时，进行递归
+                solve(root.left, cur+"->", ret);
+                solve(root.right, cur+"->", ret);
+            }
+        }
+}
