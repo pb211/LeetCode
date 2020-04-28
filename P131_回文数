@@ -23,6 +23,8 @@ public class p131 {
         return res;
     }
 
+    //(start 起始字符的索引,len   字符串 s 的长度，可以设置为全局变量
+    //,path  记录从根结点到叶子结点的路径,res   记录所有的结果)
     public void backtracking(String s,int start,int len,Deque<String> path,List<List<String>> res){
         // 递归的跳出条件，如果递归到字符串的最后一位就返回结果
         if(start == len){
@@ -30,7 +32,8 @@ public class p131 {
             return;
         }
         for(int i = start;i < len;i++){
-            // 如果不是回文数就跳出这次循环
+            // 采用传子串索引的方式判断一个子串是否是回文子串
+            // 不是的话，如果不是回文数就跳出这次循环
             if(!chechPalindrome(s,start,i)){
                 continue;
             }
