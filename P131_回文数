@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public class p79 {
+public class p131 {
     public static void main(String[] args) {
-        p79 p = new p79();
+        p131 p = new p131();
         String s = "aaab";
         List<List<String>> res = p.partition(s);
         System.out.println(res);
