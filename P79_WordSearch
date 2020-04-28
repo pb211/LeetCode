@@ -1,0 +1,56 @@
+public class exist {
+	//类变量表示前进方向
+    private static int[][] dires = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    //二维格子的行列
+    private int row, col;
+    //是否被找到
+    private boolean hasFind;
+    //使用boolean[][] visited来表示某一个坐标处的字母有没有被使用
+    private boolean[][] visited;
+   
+    public boolean exist(char[][] board, String word) {
+        row = board.length;
+        col = board[0].length;
+        hasFind = false;
+        //判断如果网格的数量都没有要找的字符数多直接返回false
+        if(row * col < word.length())
+            return false;
+        visited = new boolean[row][col];
+        char[] chars = word.toCharArray();
+        //二重循环来遍历所以可能的路径起点
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                if(board[i][j] == chars[0]){
+                    backTrack(board, chars, 1, i, j);
+                    if(hasFind)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    //回溯函数	（1，2，3下一步要索引的字符，4坐标，5坐标）
+    private void backTrack(char[][] board, char[] word, int curIndex, int x, int y){
+        if(hasFind)
+            return;
+        //当所有字符都已经按顺序找到
+        if(curIndex == word.length){
+            hasFind = true;
+            return;
+        }
+        //表示现在访问的字符已经被使用
+        visited[x][y] = true;
+        for(int[] dire : dires){
+            int newX = x + dire[0], newY = y + dire[1];
+            //（当坐标在范围内，且没有访问过，且找到的字母为索引项）时，进行递归
+            if(isIn(newX, newY) && !visited[newX][newY] && board[newX][newY] == word[curIndex])
+                backTrack(board, word, curIndex + 1, newX, newY);
+        }
+        //当前坐标回退，恢复没有使用状态visited[x][y] = false;
+        visited[x][y] = false;
+    }
+    //判断xy是否在区域内，防止越界
+    private boolean isIn(int x, int y){
+        return x >= 0 && x < row && y >= 0 && y < col;
+    }
+}
