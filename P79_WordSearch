@@ -7,7 +7,14 @@ public class exist {
     private boolean hasFind;
     //使用boolean[][] visited来表示某一个坐标处的字母有没有被使用
     private boolean[][] visited;
-   
+    public static void main(String[] args) {
+    	exist E=new exist();
+    	char[][] board ={{'A', 'B', 'C', 'E'},{'S', 'F', 'C', 'S'},{'A', 'D', 'E', 'E'}};
+	String word="ABCCED";
+	E.exist(board, word);
+	boolean exist = E.exist(board, word);
+	System.out.println(exist);
+    }
     public boolean exist(char[][] board, String word) {
         row = board.length;
         col = board[0].length;
