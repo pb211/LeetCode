@@ -6,18 +6,17 @@ public class P53_Sum {
 	        int res = s.maxSubArray(nums);
 	        System.out.println(res);
 	    }
-    public int maxSubArray(int[] nums) {
-        int ans = nums[0];
-        int sum = 0;
-        for(int num: nums) {
-            if(sum > 0) {
-                sum += num;
-            } else {
-                sum = num;
-            }
-            //比较两个参数的大小返回大的一个
-            ans = Math.max(ans, sum);
-        }
-        return ans;
-    }
+	public int maxSubArray(int[] nums) {
+		if (nums == null || nums.length == 0) {
+		    return 0;
+		}
+		int tempNum = 0; // 临时变量保存前一步数字
+		int maxNum = nums[0]; // 假定数组中第一个数就是最大的，这样才能继续向后比较
+		for (int num : nums) {
+		    tempNum = Math.max(tempNum + num, num); // 这里比较的是遍历的当前数字和之前的所有数字之和谁大
+		    maxNum = Math.max(tempNum, maxNum); // 比较之前最大值和现在的值
+		}
+		return maxNum;
+	    }
+  
 }
