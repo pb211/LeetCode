@@ -1,0 +1,48 @@
+public class P_416 {
+	public static void main(String[] args) {
+		P_416 p=new P_416();
+		int[] nums={1,5,11,5};
+	//	boolean res = p.canPartition(nums);
+		System.out.println(p.canPartition(nums));
+    }
+    public boolean canPartition(int[] nums) {
+        int len = nums.length;
+        if (len == 0) {
+            return false;
+        }
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        // 特判：如果是奇数，就不符合要求
+        if ((sum & 1) == 1) {
+            return false;
+        }
+        int target = sum / 2;
+        // 创建二维状态数组，行：物品索引，列：容量（包括 0）
+        //dp[i][j]表示，对于前 i个物品，当前背包的容量为 j 时，若为 true，
+        //则说明恰好将背包装满，或剩余元素能将其装满
+        boolean[][] dp = new boolean[len][target + 1];
+        // 先填表格第 0 行，第 1 个数只能让容积为它自己的背包恰好装满
+        if (nums[0] <= target) {
+            dp[0][nums[0]] = true;
+        }
+        // 再填表格后面几行
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j <= target; j++) {
+                // 直接延续上一状态，如不符合条件则不进行修改，若符合再进行修正
+                dp[i][j] = dp[i - 1][j];
+                if (nums[i] == j) {
+                    dp[i][j] = true;
+                    continue;
+                }
+             // 如果当前元素的大小小于背包的剩余容量，那么说明可以放入背包，延续上一个状态，
+             //并且判断剩余背包容量是否满足当前情况
+                if (nums[i] < j) {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
+                }
+            }
+        }
+        return dp[len - 1][target];
+    }
+}
