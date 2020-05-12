@@ -1,0 +1,43 @@
+import javax.swing.tree.TreeNode;
+
+
+public class p101_SymmetricTree {
+	static int val;
+	p101_SymmetricTree left;
+	p101_SymmetricTree right;
+	p101_SymmetricTree(int x){
+		val = x;
+	}
+	public static void main(String[] args){
+		p101_SymmetricTree root = new p101_SymmetricTree(1);
+        p101_SymmetricTree left = new p101_SymmetricTree(2);
+        p101_SymmetricTree right = new p101_SymmetricTree(2);
+        p101_SymmetricTree left1 = new p101_SymmetricTree(3);
+        p101_SymmetricTree left2 = new p101_SymmetricTree(4);
+        p101_SymmetricTree right1 = new p101_SymmetricTree(4);
+        p101_SymmetricTree right2 = new p101_SymmetricTree(3);
+        root.left = left;
+        root.right = right;
+        left.left = left1;
+        left.right = left2;
+        right.left = right1;
+        right.right = right2;
+        p101_SymmetricTree a = new p101_SymmetricTree(val);
+        boolean res=a.isSymmetric(root);
+        System.out.println(res);
+	}
+	public boolean isSymmetric(p101_SymmetricTree root) {
+	    return isMirror(root, root);
+	}
+
+	public boolean isMirror(p101_SymmetricTree root, p101_SymmetricTree root2) {
+		//当两个节点都为空是返回真
+	    if (root == null && root2 == null) return true;
+	    //当仅有一个为真时返回假
+	    if (root == null || root2 == null) return false;
+	    //都不为空时，判断数的左右节点是否相等
+	    return (root.val == root2.val)
+	        && isMirror(root.right, root2.left)
+	        && isMirror(root.left, root2.right);
+	}
+}
