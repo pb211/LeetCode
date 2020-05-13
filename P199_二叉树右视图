@@ -1,0 +1,60 @@
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+public class p199_BinaryTreeRightSideView {
+    int val;
+    p199_BinaryTreeRightSideView left;
+    p199_BinaryTreeRightSideView right;
+
+    p199_BinaryTreeRightSideView(int x) {
+        this.val = x;
+    }
+    public static void main(String[] args) {
+        // 创建这棵树
+        p199_BinaryTreeRightSideView root = new p199_BinaryTreeRightSideView(1);
+        p199_BinaryTreeRightSideView left1 = new p199_BinaryTreeRightSideView(2);
+        p199_BinaryTreeRightSideView left2 = new p199_BinaryTreeRightSideView(5);
+        p199_BinaryTreeRightSideView right1 = new p199_BinaryTreeRightSideView(3);
+        p199_BinaryTreeRightSideView right2 = new p199_BinaryTreeRightSideView(4);
+        root.left = left1;
+        left1.right = left2;
+        left1.left = null;
+        root.right = right1;
+        right1.right = right2;
+        right1.left = null;
+        List<Integer> res = rightSideView(root);
+        System.out.println("res = " + res);
+    }
+    public static List<Integer> rightSideView(p199_BinaryTreeRightSideView root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+            return res;
+        }
+        Queue<p199_BinaryTreeRightSideView> queue = new LinkedList<p199_BinaryTreeRightSideView>();
+        // 加入头结点
+        queue.offer(root);
+        // 当queue不为空时循环遍历
+        while (!queue.isEmpty()) {
+            // 用size记录队列长度，比较得到遍历中的最后一个元素
+            int size = queue.size();
+            //就是遍历整个现在的队列长度
+            for (int i = 0; i < size; i++) {
+                p199_BinaryTreeRightSideView node = queue.poll();
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+                // 判断当到了这一批队列的最后一个，就是这一层的最后一个，即为能看到的右节点
+                if (i == size - 1) {
+                    res.add(node.val);
+                }
+            }
+        }
+        return res;
+    }
+
+}
