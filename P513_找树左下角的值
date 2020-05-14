@@ -1,0 +1,75 @@
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.ArrayList;
+
+
+public class P513 {
+	int val;
+	P513 left;
+	P513 right;
+	P513 (int x){
+		this.val=x;
+	}
+	public static void main(String args[]){
+		P513 root= new P513(2);
+		P513 right=new P513(1);
+		P513 left=new P513(3);
+		root.left=left;
+		root.right=right;
+		//P513 root=null;
+		int res=findBottomLeftValue(root);
+	    System.out.println(res);
+	}  
+	
+	static int max_level=1;
+    static int left_value; 
+    public static int findBottomLeftValue(P513 root) {   
+    	//int max_level=1;
+      //  int left_value=0;
+        dfs(root,1);
+        return left_value;
+    }
+   
+    public static void dfs(P513 node,int level){
+    	//树为空直接返回
+        if(node==null) return;
+        //当层数大于等于最大层时
+        if(level>=max_level){
+        	//把最大值赋给level
+        	max_level=level;
+        	//把当前值赋给返回值
+        	left_value=node.val;
+        }
+        dfs(node.right,level+1);
+        dfs(node.left,level+1);
+    }
+    /*
+    
+    public static int findBottomLeftValue(P513 root) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        Queue<P513> queue = new LinkedList<P513>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            for(int i = 0; i<size; i++){
+                P513 temp = queue.poll();
+                list.add(temp.val);
+                if(temp.left != null){
+                    queue.add(temp.left);
+                }
+                if(temp.right != null){
+                    queue.add(temp.right);
+                }
+            }
+            result.add(list);
+        }
+        return result.get(result.size()-1).get(0);
+    }
+
+*/
+	
+}
+
+   
+
