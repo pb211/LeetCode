@@ -1,0 +1,39 @@
+package graph;
+
+public class P684_RedundantLinks {
+	public static void main(String asrgs[]){
+		int [][] edges={{1,2}, {1,3}, {2,3}};
+		int[] res=findRedundantConnection(edges);
+		
+		for(int a:res){
+			System.out.println(a);
+		}
+		
+	}
+	 public static int[] findRedundantConnection(int[][] edges) {
+	        int numV = edges.length; //节点个数
+	      //辅助数组，进行标识，作为父节点
+	        int[] union = new int[numV+1];
+	        //给数组赋初值，开始每个结点的父节点就是自己
+	        for(int i = 0; i < union.length; i++)
+	            union[i] = i;
+	        for(int i = 0; i < edges.length; i++){
+	        	//存放单边关系
+	            int s = edges[i][0];
+	            int t = edges[i][1];
+	            if(union[s] == union[t]){//父节点相同，说明这两个结点构成的边是重复的，返回结果
+	                int[] res = new int[]{s, t};
+	                return res;
+	            }
+	            else{//不同的话，合并两个分量
+	                int sId = union[s];
+	                for(int j = 0; j < union.length; j++){
+	                    if(union[j] == sId)
+	                        union[j] = union[t];
+	                }
+	            }
+	        }
+	        return null;
+	    }
+
+}
