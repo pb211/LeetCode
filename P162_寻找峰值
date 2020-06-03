@@ -1,0 +1,31 @@
+package find;
+import java.util.ArrayList;
+public class P162_寻找峰值 {
+	public static void main(String args[]){
+		int[] nums={1,2,3,9,1};
+	//	ArrayList<Integer> res=findPeakElement(nums);
+		int res=findPeakElement(nums);
+		System.out.println(res);
+	}
+	/*public static ArrayList<Integer> findPeakElement(int[] nums) {
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		for(int i = 1;i<nums.length-1;i++){
+			if(nums[i]>nums[i+1]&&nums[i]>nums[i-1]){
+				res.add(nums[i]);
+			}
+		}
+		return res;
+	}
+	*/
+	 public static int findPeakElement(int[] nums) {
+	        int l = 0, r = nums.length - 1;
+	        while (l < r) {
+	            int mid = (l + r) / 2;
+	            if (nums[mid] > nums[mid + 1])
+	                r = mid;
+	            else
+	                l = mid + 1;
+	        }
+	        return nums[l];
+	 }
+}
