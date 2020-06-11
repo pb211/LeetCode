@@ -1,0 +1,35 @@
+package Sort;
+import java.util.Arrays;
+public class hbqj {
+	
+	public static void main(String []args){
+        int [][]intervals = {{1,3},{2,6},{8,10},{15,18}};
+        int[][]  res=merge(intervals);
+        System.out.println(Arrays.deepToString(res));
+    }
+	public static int[][] merge(int[][] intervals) {
+	    if(intervals.length == 0){
+	        return new int[0][0];
+	    }
+	    int[][] result = new int[intervals.length][2];
+	    //按照区间的左端点升序排列
+	 // 首先按照自定义排序器给二维数组排序，如果第一个数组的第一个数字大于第二个数组的第一个数字就降序，反之升序
+        Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+	    result[0] = intervals[0];
+	    int j = 0;
+		for(int i = 1; i<intervals.length; i++){
+	        //判断是否后者的左端点小于前者的右端点，如果是，则更新前者的右端点为两者之间右端点大的那个值
+	        if(result[j][1] >= intervals[i][0]){
+	            result[j][1] = Math.max(result[j][1],intervals[i][1]);
+	        }
+	        //如果否，则说明没有重合，将区间加入结果。
+            else{
+                j++;
+                result[j] = intervals[i];
+                
+            }
+        }
+        return Arrays.copyOf(result,j+1);
+    }
+}
+
