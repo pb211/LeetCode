@@ -1,0 +1,31 @@
+  
+package Stack;
+
+import java.util.Stack;
+class Solution {
+  public static void main(String[] args) {
+        String S = "(()(()))";
+        int res = scoreOfParentheses(S);
+        System.out.println("res = " + res);
+    }
+    public int scoreOfParentheses(String S) {
+             LinkedList<Integer> stack=new LinkedList<>();
+             stack.addLast(0);
+             for(char c:S.toCharArray())
+             {
+                 if(c=='(')
+                     stack.addLast(0);
+                 else{
+                     
+                     int a=stack.removeLast();
+                     int b=stack.removeLast();
+                     stack.addLast(b+Math.max(2*a,1));
+                     
+                     
+                 }
+                 
+                 
+             }
+             return  stack.getLast();
+    }
+}
