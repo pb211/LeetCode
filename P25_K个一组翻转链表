@@ -1,0 +1,68 @@
+package chain;
+
+public class P25_ReverseLinked {
+	  int val;
+	  P25_ReverseLinked next;
+	  P25_ReverseLinked() {}
+	  P25_ReverseLinked(int val) {
+        this.val = val;
+      }
+	  P25_ReverseLinked(int val, P25_ReverseLinked next) {
+	        this.val = val;
+	        this.next = next;
+	    }
+	    public static void main(String[] args) {
+	    	P25_ReverseLinked Num1 = new P25_ReverseLinked(1);
+	    	P25_ReverseLinked Num2 = new P25_ReverseLinked(2);
+	    	P25_ReverseLinked Num3 = new P25_ReverseLinked(3);
+	    	P25_ReverseLinked Num4 = new P25_ReverseLinked(4);
+	    	P25_ReverseLinked Num5 = new P25_ReverseLinked(5);
+	        
+	        Num1.next = Num2;
+	        Num2.next = Num3;
+	        Num3.next = Num4;
+	        Num4.next = Num5;
+	        P25_ReverseLinked res = reverseKGroup(Num1, 1);
+	        res = res.next;
+	        while (res != null) {
+	            System.out.print(res.val + " ");
+	            res = res.next;
+	        }
+	    }
+	    public static P25_ReverseLinked reverseKGroup(P25_ReverseLinked head, int k) {
+	        if (head == null || head.next == null) {
+	            return head;
+	        }
+	        P25_ReverseLinked tail = head;
+	        for (int i = 0; i < k; i++) {
+	            //剩余数量小于k的话，则不需要反转。
+	            if (tail == null) {
+	                return head;
+	            }
+	            tail = tail.next;
+	        }
+	        // 反转前 k 个元素
+	        P25_ReverseLinked newHead = reverse(head, tail);
+	        //下一轮的开始的地方就是tail
+	        head.next = reverseKGroup(tail, k);
+
+	        return newHead;
+	    }
+
+	    /*
+	    左闭又开区间
+	     */
+	    private static P25_ReverseLinked reverse(P25_ReverseLinked head, P25_ReverseLinked tail) {
+	    	P25_ReverseLinked pre = null;
+	    	P25_ReverseLinked next = null;
+	        while (head != tail) {
+	            next = head.next;
+	            head.next = pre;
+	            pre = head;
+	            head = next;
+	        }
+	        return pre;
+
+	    }
+
+}
