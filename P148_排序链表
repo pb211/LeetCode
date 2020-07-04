@@ -1,0 +1,57 @@
+package chain;
+
+public class P148_SortLink {
+	 int val;
+	 P148_SortLink next;
+	 P148_SortLink() {}
+	 P148_SortLink(int val) {
+	        this.val = val;
+	 }
+	 P148_SortLink(int val, P148_SortLink next) {
+	        this.val = val;
+	        this.next = next;
+	    }
+	    public static void main(String[] args) {
+	    	P148_SortLink Num1 = new P148_SortLink(4);
+	    	P148_SortLink Num2 = new P148_SortLink(2);
+	    	P148_SortLink Num3 = new P148_SortLink(1);
+	    	P148_SortLink Num4 = new P148_SortLink(3); 
+	        Num1.next = Num2;
+	        Num2.next = Num3;
+	        Num3.next = Num4;
+	        P148_SortLink res = sortList(Num1);
+	        res = res.next;
+	        while (res != null) {
+	            System.out.print(res.val + ",");
+	            res = res.next;
+	        }
+	    }
+	    public static P148_SortLink sortList(P148_SortLink head) {
+	        if (head == null || head.next == null)
+	            return head;
+	        P148_SortLink fast = head.next, slow = head;
+	        while (fast != null && fast.next != null) {
+	            slow = slow.next;
+	            fast = fast.next.next;
+	        }
+	        P148_SortLink tmp = slow.next;
+	        slow.next = null;
+	        P148_SortLink left = sortList(head);
+	        P148_SortLink right = sortList(tmp);
+	        P148_SortLink h = new P148_SortLink(0);
+	        P148_SortLink res = h;
+	        while (left != null && right != null) {
+	            if (left.val < right.val) {
+	                h.next = left;
+	                left = left.next;
+	            } else {
+	                h.next = right;
+	                right = right.next;
+	            }
+	            h = h.next;
+	        }
+	        h.next = left != null ? left : right;
+	        return res.next;
+	    }
+
+}
