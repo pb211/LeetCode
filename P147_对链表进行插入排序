@@ -1,0 +1,62 @@
+package chain;
+
+public class P147_InsertionSortLonk {
+
+	 int val;
+	 P147_InsertionSortLonk next;
+	 P147_InsertionSortLonk() {}
+	 P147_InsertionSortLonk(int val) {
+	        this.val = val;
+	 }
+	 P147_InsertionSortLonk(int val, P147_InsertionSortLonk next) {
+	        this.val = val;
+	        this.next = next;
+	    }
+	    public static void main(String[] args) {
+	    	P147_InsertionSortLonk Num1 = new P147_InsertionSortLonk(4);
+	    	P147_InsertionSortLonk Num2 = new P147_InsertionSortLonk(2);
+	    	P147_InsertionSortLonk Num3 = new P147_InsertionSortLonk(1);
+	    	P147_InsertionSortLonk Num4 = new P147_InsertionSortLonk(3); 
+	        Num1.next = Num2;
+	        Num2.next = Num3;
+	        Num3.next = Num4;
+	        P147_InsertionSortLonk res = insertionSortList(Num1);
+	        res = res.next;
+	        while (res != null) {
+	            System.out.print(res.val + ",");
+	            res = res.next;
+	        }
+	    }
+	    public static P147_InsertionSortLonk insertionSortList(P147_InsertionSortLonk head) {
+	         if(head == null || head.next == null)
+	            return head;
+
+	         P147_InsertionSortLonk dummy = new P147_InsertionSortLonk(-1);
+	        dummy.next = head;
+
+	        P147_InsertionSortLonk pre = dummy.next;
+
+	        while (pre.next != null){
+	            int val = pre.next.val;
+	            P147_InsertionSortLonk nex = pre.next.next;
+	            P147_InsertionSortLonk pi = dummy;
+
+	            for(; pi != pre; pi = pi.next){
+	                if(pi.next.val > val){
+	                	P147_InsertionSortLonk pj = pi.next;
+	                	P147_InsertionSortLonk swapNode = pre.next;
+
+	                    pi.next = swapNode;
+	                    swapNode.next = pj;
+	                    pre.next = nex;
+
+	                    break;
+	                }
+	            }
+
+	            if(pi == pre) pre = pre.next;
+	        }
+	            return dummy.next;
+	    }
+
+}
