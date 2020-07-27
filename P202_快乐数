@@ -1,0 +1,36 @@
+package HashSet;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class p202_HappyNumber {
+    public static void main(String[] args) {
+        int num = 19;
+        boolean res = isHappy(num);
+        System.out.println(res);
+    }
+    public static boolean isHappy(int n) {
+        Set<Integer> set = new HashSet<Integer>();
+        set.add(n);
+        while (true) {
+            n = getHappyNum(n);
+            if (n == 1) {
+                return true;
+            }
+            if (set.contains(n)) {
+                return false;
+            }
+            set.add(n);
+        }
+    }
+
+    public static int getHappyNum(int n) {
+        int sum = 0;
+        while (n != 0) {
+            sum += (n % 10) * (n % 10);
+            n /= 10;
+        }
+        return sum;
+    }
+
+}
