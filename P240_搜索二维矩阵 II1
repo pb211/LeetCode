@@ -1,0 +1,37 @@
+package fenzhi;
+
+public class SearchTwoDimensionalMatrix {
+
+	public static void main(String[] args) {
+		int[][] matrix={{1,4,7},
+						{2,5,8},
+						{3,6,9}};
+		boolean res=searchMatrix(matrix,5);
+		System.out.println("res = " + res);
+	}
+	 public static boolean searchMatrix(int[][] matrix, int target) {
+	       if(matrix.length == 0 || matrix[0].length == 0) return false;
+	        return helper(matrix, matrix.length - 1, 0, target);
+	    }
+
+	    private static boolean helper(int[][] matrix, int m, int sn, int target) {
+	        int sm = 0, ceiling = m + 1;
+	        while (sm <= m){
+	            int len = (sm + m) >>> 1;
+	            if (matrix[len][sn] == target) return true;
+	            if (matrix[len][sn] < target) sm = len + 1;
+	            else m = len - 1;
+	        }
+	        if(sm == ceiling) sm--;
+	        int en = matrix[0].length - 1;
+	        while (sn <= en){
+	            int len = (sn + en) >>> 1;
+	            if (matrix[sm][len] == target) return true;
+	            if (matrix[sm][len] < target) sn = len + 1;
+	            else en = len - 1;
+	        }
+	        if (sn == matrix[0].length || sm == 0) return false;
+	        return helper(matrix, sm - 1, sn, target);
+	    }
+
+}
