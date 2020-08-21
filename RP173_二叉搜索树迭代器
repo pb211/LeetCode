@@ -1,0 +1,61 @@
+package stack;
+
+import java.util.Stack;
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) {
+        this.val = x;
+    }
+}
+public class p173_BinarySearchTreeIterator {
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(7);
+        TreeNode left = new TreeNode(3);
+        TreeNode right = new TreeNode(15);
+        TreeNode right1 = new TreeNode(9);
+        TreeNode right2 = new TreeNode(20);
+        root.left = left;
+        root.right = right;
+        right.left = right1;
+        right.right = right2;
+        p173_BinarySearchTreeIterator iterator = new p173_BinarySearchTreeIterator();
+        System.out.print(iterator.next() + " ");
+        System.out.print(iterator.next() + " ");
+        System.out.print(iterator.hasNext() + " ");
+        System.out.print(iterator.next() + " ");
+        System.out.print(iterator.hasNext() + " ");
+        System.out.print(iterator.next() + " ");
+        System.out.print(iterator.hasNext() + " ");
+        System.out.print(iterator.next() + " ");
+        System.out.print(iterator.hasNext() + " ");
+    }
+
+    Stack<TreeNode> stack;
+    public void BSTIterator(TreeNode root) {
+        this.stack = new Stack<TreeNode>();
+        this._leftmostInorder(root);
+    }
+    private void _leftmostInorder(TreeNode root) {
+        while (root != null) {
+            this.stack.push(root);
+            root = root.left;
+        }
+    }
+    public int next() {
+        TreeNode topmostNode = this.stack.pop();
+
+        if (topmostNode.right != null) {
+            this._leftmostInorder(topmostNode.right);
+        }
+        return topmostNode.val;
+    }
+
+
+    public boolean hasNext() {
+        return this.stack.size() > 0;
+    }
+
+}
