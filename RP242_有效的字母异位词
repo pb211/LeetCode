@@ -1,0 +1,26 @@
+package Sort;
+
+import java.util.Arrays;
+
+public class RP242_ValidAnagram {
+	 public static void main(String[] args) {
+	        String s = "rat";
+	        String t = "car";
+	        boolean res = isAnagram(s, t);
+	        System.out.println("res = " + res);
+	 }
+	 public static boolean isAnagram(String s, String t) {
+		 if(s.length()!=t.length()){
+			 return false;
+		 }
+		 char[] str1 = s.toCharArray();
+		 char[] str2 = t.toCharArray();
+		 Arrays.sort(str1);
+		 Arrays.sort(str2);
+		 if (str1.equals(str2)){
+			 return false;
+		 }
+		return false;
+	}
+
+}
