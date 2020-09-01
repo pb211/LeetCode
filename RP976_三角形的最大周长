@@ -1,0 +1,19 @@
+package Sort;
+import java.util.Arrays;
+public class RP9760_Maxlong {
+	public static void main(String[] args) {
+		int[] a={2,1,2};
+		int res=largestPerimeter(a);
+		System.out.print(res);
+	}
+	 public static int largestPerimeter(int[] A) {
+		System.out.println(A.length);
+		Arrays.sort(A);
+		for(int i=A.length;i>=3;--i){
+			if(A[i-3]+A[i-2]>A[i-1]){
+				return A[i-3]+A[i-2]+A[i-1];
+			}
+		}
+		return 0;
+	 }
+}
