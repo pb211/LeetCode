@@ -1,0 +1,24 @@
+package find;
+
+import java.util.Arrays;
+
+public class RP167_TwoSumIIInputArrayIsSorted {
+
+	public static void main(String[] args) {
+		int[] numbers={2,7,11,15};
+		int[] res=twoSum(numbers,9);
+		System.out.println(Arrays.toString(res));
+	}
+	public static int[] twoSum(int[] numbers, int target) {
+		for(int i=0;i<=numbers.length;i++){
+			for(int j=i+1;j<=numbers.length;j++){
+				if(numbers[i]+numbers[j]==target){
+					return new int[]{i+1,j+1};
+				}
+			}
+		}
+		
+		return new int[]{0,0};
+
+    }
+}
