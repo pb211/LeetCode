@@ -1,0 +1,16 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int n = 0;
+        int m = matrix.length-1;
+        while(m > -1 && n < matrix[0].length){  
+            if (matrix[m][n] == target) {
+                return true;
+            }else if (matrix[m][n] < target) {
+                n++;
+            }else {
+                m--;
+            }
+        }
+		return false;
+    }
+}
