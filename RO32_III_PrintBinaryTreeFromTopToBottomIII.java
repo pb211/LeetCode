@@ -49,6 +49,7 @@ public class RO32_III_PrintBinaryTreeFromTopToBottomIII {
                     queue.offer(node.right);
                 }
             }
+            //当p值改变为偶数，翻转临时数组
             if (p%2!=0){
                 res.add(tmp);
             }else {
