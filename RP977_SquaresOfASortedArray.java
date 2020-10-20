@@ -8,6 +8,7 @@ public class RP977_SquaresOfASortedArray {
         int []res = sortedSquares(A);
         System.out.println(Arrays.toString(res));
     }
+     //一、直接计算平方后排序
     public static int[] sortedSquares1(int[] A) {
         int []res = new int[A.length];
         for(int i=0;i<A.length;i++){
@@ -16,6 +17,7 @@ public class RP977_SquaresOfASortedArray {
         Arrays.sort(res);
         return res;
     }
+     //二、双指针从两边顺序寻找最大值插入res
     public static int[] sortedSquares(int[] A) {
         int[] res = new int[A.length];
         int left=0;
