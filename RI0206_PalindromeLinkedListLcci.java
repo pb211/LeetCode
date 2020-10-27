@@ -19,10 +19,14 @@ public class RI0206_PalindromeLinkedListLcci {
     }
     public static boolean isPalindrome(RI0206_PalindromeLinkedListLcci head) {
         if (head==null||head.next==null){return true;}
+        //数组长度
         int l=longs(head);
-        int mid= (int) Math.ceil(l/2.00);
+        //得到前半段数组，这里的中间数要向下取整
         int []arr=reint(head, (int) Math.floor(l/2));
+        //中间数的后半段，这里的数要向上取整
+        int mid= (int) Math.ceil(l/2.00);
         for (int i=1;i<=l;i++){
+            //当下标过半时，与前半段的翻转数组逐一判断，不等则为false
             if (i>mid && head.val!=arr[i-mid-1]){
                 return false;
             }
