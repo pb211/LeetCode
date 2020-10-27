@@ -10,10 +10,10 @@ public class RI0206_PalindromeLinkedListLcci {
         RI0206_PalindromeLinkedListLcci one = new RI0206_PalindromeLinkedListLcci(1);
         RI0206_PalindromeLinkedListLcci two = new RI0206_PalindromeLinkedListLcci(2);
         RI0206_PalindromeLinkedListLcci three = new RI0206_PalindromeLinkedListLcci(2);
-//        RI0206_PalindromeLinkedListLcci four = new RI0206_PalindromeLinkedListLcci(1);
+        RI0206_PalindromeLinkedListLcci four = new RI0206_PalindromeLinkedListLcci(1);
         one.next=two;
         two.next=three;
-//        three.next=four;
+        three.next=four;
         boolean res = isPalindrome(one);
         System.out.println(res);
     }
