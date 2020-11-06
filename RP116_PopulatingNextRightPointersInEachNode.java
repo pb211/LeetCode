@@ -39,7 +39,15 @@ public class RP116_PopulatingNextRightPointersInEachNode {
         three.left=six;
         three.right=seven;
         RP116_PopulatingNextRightPointersInEachNode res = connect(one);
-        System.out.println(res);
+        while (res!=null){
+            RP116_PopulatingNextRightPointersInEachNode mid=res;
+            while (mid!=null){
+                System.out.print(mid.val+"\t");
+                mid=mid.next;
+            }
+            System.out.print("null\t");
+            res=res.left;
+        }
     }
 
     public static RP116_PopulatingNextRightPointersInEachNode connect(RP116_PopulatingNextRightPointersInEachNode root) {
